@@ -2,14 +2,15 @@ from collections import Counter
 
 import cv2 as cv
 import mediapipe as mp
+from textblob import TextBlob
 
-from src.letter_detection.points_normalization import normalize_lists
-from src.letter_detection.letters import Letter
 from src.letter_detection.hand import Hand
+from src.letter_detection.letters import Letter
+from src.letter_detection.points_normalization import normalize_lists
 
-VIDEO_PATH = "../assets/timberlands_v1.mkv"
+VIDEO_PATH = "../assets/animals.mkv"
 LETTERS_BATCH_SIZE = 10
-LETTERS_AMOUNT_TO_APPROVE = 8
+LETTERS_AMOUNT_TO_APPROVE = 5
 
 cap = cv.VideoCapture(VIDEO_PATH)
 
@@ -69,11 +70,47 @@ while True:
                     word += potential_letter
                     last_letter = potential_letter
 
+        cv.putText(
+            img,
+            f"{word}",
+            (img.shape[1] // 10, img.shape[0] // 10),
+            cv.FONT_HERSHEY_SIMPLEX,
+            3,
+            (0, 0, 0),
+            8,
+        )
+        cv.putText(
+            img,
+            f"{word}",
+            (img.shape[1] // 10, img.shape[0] // 10),
+            cv.FONT_HERSHEY_SIMPLEX,
+            3,
+            (255, 255, 255),
+            4,
+        )
 
-        cv.putText(img, f"{word}, {last_letters}", (img.shape[0] // 3, img.shape[1] // 3),
-                   cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+        cv.putText(
+            img,
+            f"{last_letters}",
+            (img.shape[1] // 10, img.shape[0] // 5),
+            cv.FONT_HERSHEY_SIMPLEX,
+            3,
+            (0, 0, 0),
+            8,
+        )
+        cv.putText(
+            img,
+            f"{last_letters}",
+            (img.shape[1] // 10, img.shape[0] // 5),
+            cv.FONT_HERSHEY_SIMPLEX,
+            3,
+            (255, 255, 255),
+            4,
+        )
 
-    cv.imshow("Video", img)
+    cv.imshow("Video", cv.resize(img, (0, 0), fx=0.7, fy=0.7))
     if cv.waitKey(1) & 0xFF == ord("q"):
         break
+
 print(word)
+print("corrected word: ", TextBlob(word.lower()).correct())
