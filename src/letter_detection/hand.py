@@ -87,13 +87,13 @@ class Hand:
             return 4
 
     def is_closed_hand(self) -> bool:
-        close_hand_threshold = 0.5
+        close_hand_threshold = -0.1
         return (
             # index finger in some letters is a little higher even with closed hand
-            self.__wrist.height - self.__index.top.height < close_hand_threshold + 0.3
-            and self.__wrist.height - self.__middle.top.height < close_hand_threshold
-            and self.__wrist.height - self.__ring.top.height < close_hand_threshold
-            and self.__wrist.height - self.__pinky.top.height < close_hand_threshold
+            self.__index.bottom.height - self.__index.top.height < close_hand_threshold
+            and self.__middle.bottom.height - self.__middle.top.height < close_hand_threshold
+            and self.__ring.bottom.height - self.__ring.top.height < close_hand_threshold
+            and self.__pinky.bottom.height - self.__pinky.top.height < close_hand_threshold
         )
 
     def is_front(self) -> bool:
