@@ -1,0 +1,4 @@
+opencv-python==4.8.*
+mediapipe==0.10.7
+numpy==1.26.*
+black==23.10.*
