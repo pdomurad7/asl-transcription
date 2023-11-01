@@ -94,7 +94,7 @@ while True:
             f"{last_letters}",
             (img.shape[1] // 10, img.shape[0] // 5),
             cv.FONT_HERSHEY_SIMPLEX,
-            3,
+            2,
             (0, 0, 0),
             8,
         )
@@ -103,7 +103,7 @@ while True:
             f"{last_letters}",
             (img.shape[1] // 10, img.shape[0] // 5),
             cv.FONT_HERSHEY_SIMPLEX,
-            3,
+            2,
             (255, 255, 255),
             4,
         )
