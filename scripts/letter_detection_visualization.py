@@ -2,9 +2,9 @@ import cv2 as cv
 import mediapipe as mp
 import numpy as np
 
-from src.letter_detection.hand import Hand
-from src.letter_detection.letters import Letter
-from src.letter_detection.points_normalization import normalize_lists
+from src.letter_detection.analysis_model_utils.hand import Hand
+from src.letter_detection.analysis_model_utils.letters import Letter
+from src.video_transcription.points_normalization import normalize_lists
 
 
 def draw_circles(xs, ys, radius=10, img_size=480, white=False):

@@ -4,9 +4,9 @@ import cv2 as cv
 import mediapipe as mp
 from textblob import TextBlob
 
-from src.letter_detection.hand import Hand
-from src.letter_detection.letters import Letter
-from src.letter_detection.points_normalization import normalize_lists
+from src.letter_detection.analysis_model_utils.hand import Hand
+from src.letter_detection.analysis_model_utils.letters import Letter
+from src.video_transcription.points_normalization import normalize_lists
 
 VIDEO_PATH = "../assets/animals.mkv"
 LETTERS_BATCH_SIZE = 10

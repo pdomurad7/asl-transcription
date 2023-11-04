@@ -1,0 +1,12 @@
+{
+  "letter_detection_model": {
+    "model_type": "NNModel",
+    "model_config": {
+      "model_path": "nn_model_training/models/video_dataset_fhpq_no_rotate_xyz.keras",
+      "confident_threshold": 0.75
+    }
+  },
+  "letters_batch_size": 10,
+  "letters_amount_to_approve": 8,
+  "video_path": "assets/animals.mkv"
+}
