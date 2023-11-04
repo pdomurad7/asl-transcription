@@ -1,4 +1,5 @@
 import logging
+import time
 from collections import Counter
 
 import cv2 as cv
@@ -39,6 +40,7 @@ class VideoTranscription:
 
     def get_transcription(self):
         self.__logger.info("Starting transcription...")
+        transcription_start_time = time.perf_counter()
         last_letter = None
         first_iteration = True
         word = ""
@@ -60,7 +62,7 @@ class VideoTranscription:
                 letter = self.__letter_detection_model.predict(
                     list_normalized_xs, list_normalized_ys, zs
                 )
-                if not letter:
+                if letter is None:
                     continue
 
                 if first_iteration:
@@ -79,4 +81,7 @@ class VideoTranscription:
                     if potential_letter != last_letter:
                         word += potential_letter
                         last_letter = potential_letter
+        self.__logger.info(
+            f"Transcription took {time.perf_counter() - transcription_start_time} seconds"
+        )
         return word

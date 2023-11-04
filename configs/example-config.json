@@ -1,9 +1,8 @@
 {
   "letter_detection_model": {
-    "model_type": "NNModel",
+    "model_type": "DecisionTreeModel",
     "model_config": {
-      "model_path": "nn_model_training/models/video_dataset_fhpq_no_rotate_xyz.keras",
-      "confident_threshold": 0.75
+      "model_path": "models_training/models/decision_tree_fhpq_no_rotate.pkl"
     }
   },
   "letters_batch_size": 10,

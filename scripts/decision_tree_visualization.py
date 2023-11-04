@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-from tensorflow.keras.models import load_model
+import joblib
 import mediapipe as mp
 
 from src.letter_detection.letters import Letters
@@ -29,7 +29,7 @@ hands = mpHands.Hands(
 )
 mpDraw = mp.solutions.drawing_utils
 
-model = load_model("../nn_model_training/models/video_dataset_fhpq_no_rotate_xyz.keras")
+model = joblib.load("../models_training/models/decision_tree_fhpq_no_rotate.pkl")
 
 while True:
     success, img = cap.read()

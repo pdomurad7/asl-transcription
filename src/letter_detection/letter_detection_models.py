@@ -1,12 +1,14 @@
 import logging
 from abc import abstractmethod
 
+import joblib
 import numpy as np
 from tensorflow.keras.models import load_model
 
+from src.letter_detection.letters import Letters
+
 from .analysis_model_utils.hand import Hand
 from .analysis_model_utils.letters import letters
-from .nn_model_utils.letters import Letters
 
 
 class LetterDetectionModel:
@@ -42,7 +44,7 @@ class NNModel(LetterDetectionModel):
 
     def predict(self, xs, ys, zs) -> str | None:
         data_to_predict = np.array([xs + ys + zs])
-        prediction = self.__model.predict(data_to_predict, verbose=0    )[0]
+        prediction = self.__model.predict(data_to_predict, verbose=0)[0]
         if np.max(prediction) < self.__confident_threshold:
             return None
         return Letters(np.argmax(prediction)).name
@@ -56,10 +58,11 @@ class DecisionTreeModel(LetterDetectionModel):
         self.__initialize_model()
 
     def __initialize_model(self):
-        pass
+        self.__model = joblib.load(self.__model_path)
 
-    def predict(self, xs, ys, zs) -> str | None:
-        pass
+    def predict(self, xs, ys, zs) -> str:
+        predicted_array = self.__model.predict(np.array([xs + ys + zs]))[0]
+        return Letters(np.argmax(predicted_array)).name
 
 
 letter_detection_models = {
@@ -73,7 +76,9 @@ class LetterDetectionModelFactory:
         model_type = config["model_type"]
         model_config = config.get("model_config", {})
         if model_type in letter_detection_models:
-            logging.getLogger("LetterDetectionModelFactory").info(f"Creating {model_type} with config {model_config}")
+            logging.getLogger("LetterDetectionModelFactory").info(
+                f"Creating {model_type} with config {model_config}"
+            )
             return letter_detection_models[model_type](model_config)
         else:
             raise ValueError(

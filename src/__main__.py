@@ -1,15 +1,15 @@
 import json
 import logging
 import os
+import warnings
 
 from textblob import TextBlob
 
 from src.video_transcription.video_transcription import VideoTranscription
 
-
 if __name__ == "__main__":
     os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
-    logging.getLogger("mediapipe").setLevel(logging.ERROR)
+    warnings.filterwarnings("ignore")
 
     with open("configs/example-config.json", "r") as f:
         config = json.load(f)
