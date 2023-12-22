@@ -1,3 +1,0 @@
-dataset created from my records
-800 samples per letter
-letters are normalized and rotated, excluding F, H, P, Q that are only normalized.

@@ -63,13 +63,13 @@ while True:
         ys = [p.y for p in handLms.landmark]
         zs = [p.z for p in handLms.landmark]
 
-        list_normalized_xs, list_normalized_ys = normalize_lists(xs, ys)
+        list_normalized_xs, list_normalized_ys, is_vertical = normalize_lists(xs, ys)
 
         img_circle = draw_circles(xs, ys, radius=5)
         another_img = draw_circles(
             list_normalized_xs, list_normalized_ys, radius=5, white=False
         )
-        hand = Hand(list_normalized_xs, list_normalized_ys, zs)
+        hand = Hand(list_normalized_xs, list_normalized_ys, zs, is_vertical)
         letters = [
             letter.__name__
             for letter in Letter.__subclasses__()

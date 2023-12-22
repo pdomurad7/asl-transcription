@@ -18,6 +18,7 @@ class A(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
             assert self.hand.ring.is_folded()
@@ -39,6 +40,7 @@ class B(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert not self.hand.index.is_folded()
             assert not self.hand.middle.is_folded()
@@ -58,6 +60,7 @@ class C(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_almost_folded()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
@@ -78,6 +81,7 @@ class D(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert not self.hand.index.is_almost_folded()
             assert self.hand.middle.is_folded()
@@ -97,6 +101,7 @@ class E(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert self.hand.thumb.is_almost_folded()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
@@ -118,6 +123,7 @@ class F(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert self.hand.index.is_folded()
             assert not self.hand.middle.is_folded()
@@ -135,8 +141,17 @@ class G(Letter):
         super().__init__(hand)
 
     def check_rules(self) -> bool:
-        # TODO: implement side letters
-        return False
+        try:
+            assert self.hand.is_front()
+            assert not self.hand.is_vertical()
+            assert not self.hand.index.is_folded()
+            assert self.hand.middle.is_folded()
+            assert self.hand.ring.is_folded()
+            assert self.hand.pinky.is_folded()
+        except AssertionError:
+            return False
+        else:
+            return True
 
 
 class H(Letter):
@@ -144,8 +159,17 @@ class H(Letter):
         super().__init__(hand)
 
     def check_rules(self) -> bool:
-        # TODO: implement side letters
-        return False
+        try:
+            assert self.hand.is_front()
+            assert not self.hand.is_vertical()
+            assert not self.hand.index.is_folded()
+            assert not self.hand.middle.is_folded()
+            assert self.hand.ring.is_folded()
+            assert self.hand.pinky.is_folded()
+        except AssertionError:
+            return False
+        else:
+            return True
 
 
 class I(Letter):
@@ -154,6 +178,7 @@ class I(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
@@ -182,6 +207,7 @@ class K(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert not self.hand.index.is_folded()
             assert not self.hand.middle.is_folded()
@@ -210,6 +236,7 @@ class L(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
             assert self.hand.ring.is_folded()
@@ -228,6 +255,7 @@ class M(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
             assert self.hand.ring.is_folded()
@@ -249,6 +277,7 @@ class N(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
             assert self.hand.ring.is_folded()
@@ -270,6 +299,7 @@ class O(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
@@ -288,8 +318,17 @@ class P(Letter):
         super().__init__(hand)
 
     def check_rules(self) -> bool:
-        # TODO: implement side letters
-        return False
+        try:
+            assert not self.hand.is_front()
+            assert not self.hand.is_vertical()
+            assert not self.hand.index.is_folded()
+            assert self.hand.middle.is_folded()
+            assert self.hand.ring.is_folded()
+            assert self.hand.pinky.is_folded()
+        except AssertionError:
+            return False
+        else:
+            return True
 
 
 class Q(Letter):
@@ -297,8 +336,14 @@ class Q(Letter):
         super().__init__(hand)
 
     def check_rules(self) -> bool:
-        # TODO: implement side letters
-        return False
+        try:
+            assert not self.hand.is_front()
+            assert not self.hand.is_vertical()
+            assert self.hand.index.is_folded()
+        except AssertionError:
+            return False
+        else:
+            return True
 
 
 class R(Letter):
@@ -307,6 +352,7 @@ class R(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert not self.hand.index.is_folded()
             assert not self.hand.middle.is_folded()
@@ -327,6 +373,7 @@ class S(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
             assert self.hand.ring.is_folded()
@@ -349,6 +396,7 @@ class T(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()
             assert self.hand.ring.is_folded()
@@ -371,6 +419,7 @@ class U(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert not self.hand.index.is_folded()
             assert not self.hand.middle.is_folded()
@@ -396,6 +445,7 @@ class V(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert not self.hand.index.is_folded()
             assert not self.hand.middle.is_folded()
@@ -420,6 +470,7 @@ class W(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert not self.hand.index.is_folded()
             assert not self.hand.middle.is_folded()
@@ -439,6 +490,7 @@ class X(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert self.hand.index.is_almost_folded()
             assert self.hand.middle.is_folded()
             assert self.hand.ring.is_folded()
@@ -462,6 +514,7 @@ class Y(Letter):
 
     def check_rules(self) -> bool:
         try:
+            assert self.hand.is_vertical()
             assert not self.hand.thumb.is_folded()
             assert self.hand.index.is_folded()
             assert self.hand.middle.is_folded()

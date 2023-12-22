@@ -18,7 +18,7 @@ def draw_circles(xs, ys, radius=10, img_size=480):
     return img
 
 
-cap = cv.VideoCapture(0)
+cap = cv.VideoCapture("/home/pawel/Videos/ASL_dataset_videos/anita_asl/N.mkv")
 
 mpHands = mp.solutions.hands
 hands = mpHands.Hands(
@@ -29,7 +29,7 @@ hands = mpHands.Hands(
 )
 mpDraw = mp.solutions.drawing_utils
 
-model = load_model("../nn_model_training/models/video_dataset_fhpq_no_rotate_xyz.keras")
+model = load_model("../models_training/models/pawel_anita_love_8.keras")
 
 while True:
     success, img = cap.read()
@@ -48,7 +48,7 @@ while True:
         xs = [p.x for p in handLms.landmark]
         ys = [p.y for p in handLms.landmark]
         zs = [p.z for p in handLms.landmark]
-        normalized_xs, normalized_ys = normalize_lists(xs, ys)
+        normalized_xs, normalized_ys, _ = normalize_lists(xs, ys)
         img_circle = draw_circles(normalized_xs, normalized_ys)
 
         data_to_predict = np.array([normalized_xs + normalized_ys + zs])

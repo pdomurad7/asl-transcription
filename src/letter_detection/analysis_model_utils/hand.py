@@ -49,10 +49,11 @@ class Finger:
 class Hand:
     TOUCHING_THRESHOLD = 0.15
 
-    def __init__(self, x_points, y_points, z_points):
+    def __init__(self, x_points, y_points, z_points, is_vertical: bool) -> None:
         self.__x_points = x_points
         self.__y_points = y_points
         self.__z_points = z_points
+        self.__is_vertical = is_vertical
         self.__wrist = Point(x_points[0], y_points[0], z_points[0])
         self.__thumb = Finger(x_points[1:5], y_points[1:5], z_points[1:5])
         self.__index = Finger(x_points[5:9], y_points[5:9], z_points[5:9])
@@ -65,6 +66,9 @@ class Hand:
         return np.sqrt(
             (point1.width - point2.width) ** 2 + (point1.height - point2.height) ** 2
         )
+
+    def is_vertical(self) -> bool:
+        return self.__is_vertical
 
     def thumb_position(self) -> int:
         if self.__thumb.top.width > self.__index.middle_bottom.width:

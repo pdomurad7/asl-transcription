@@ -12,7 +12,7 @@ from .analysis_model_utils.letters import letters
 
 
 class LetterDetectionModel:
-    def __init__(self, config: dict):
+    def __init__(self, config: dict | None = None):
         self.__config = config
 
     @abstractmethod
@@ -21,8 +21,8 @@ class LetterDetectionModel:
 
 
 class AnalysisModel(LetterDetectionModel):
-    def predict(self, xs, ys, zs) -> str | None:
-        hand = Hand(xs, ys, zs)
+    def predict(self, xs, ys, zs, is_vertical) -> str | None:
+        hand = Hand(xs, ys, zs, is_vertical=True)
         matched_letters = [
             letter.__name__ for letter in letters if letter(hand).check_rules()
         ]
